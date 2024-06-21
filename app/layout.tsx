@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import {NextUIProvider} from "@nextui-org/system";
+import {Web3Modal} from "@/app/context/web3modal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+      <Web3Modal>
+          <NextUIProvider>
+              {children}
+          </NextUIProvider>
+      </Web3Modal>
+    </body>
     </html>
   );
 }
