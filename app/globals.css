@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --height-offset: 44px;
+}
+
+.full-height {
+    /* 计算 100vh - 44px */
+    height: calc(100vh - var(--height-offset));
+}
+.global-map canvas{
+    height: calc(100vh - var(--height-offset));
+}
