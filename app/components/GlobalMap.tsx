@@ -19,6 +19,9 @@ export default function GlobalMap() {
     const [region, setRegion] = useState(50)
     async function getRegions() {
         if (!account.isConnected) throw Error('User disconnected')
+        if(!walletProvider){
+            return;
+         }
         const ethersProvider = new BrowserProvider(walletProvider)
         const signer = await ethersProvider.getSigner()
         const FreeLanContract = new Contract(FreeLanAddress, FreeLandAbi, signer);
@@ -28,6 +31,10 @@ export default function GlobalMap() {
     }
     async function mint(idx: number, color: string) {
         if (!account.isConnected) throw Error('User disconnected')
+
+        if(!walletProvider){
+            return;
+        }
         const ethersProvider = new BrowserProvider(walletProvider)
         const signer = await ethersProvider.getSigner()
         const FreeLanContract = new Contract(FreeLanAddress, FreeLandAbi, signer);
@@ -162,10 +169,13 @@ export default function GlobalMap() {
                     const rowIndex = Math.floor(flatIndex / divisions);
                     const colIndex = flatIndex % divisions;
                     if (rowIndex <= region && colIndex >= region) {
-                        // 把当前被点击的平面颜色设置为随机颜色
-                        intersected.material.color.set(Math.random() * 0xffffff);
-                        lastIntersected = intersected;
-                        // mint(flatIndex, intersected.material.color.getHexString());
+                        if(intersected instanceof THREE.Mesh){
+                            // 把当前被点击的平面颜色设置为随机颜色
+                            intersected.material.color.set(Math.random() * 0xffffff);
+                            lastIntersected = intersected;
+                            // mint(flatIndex, intersected.material.color.getHexString());
+                        }
+                       
                     }
                 }
             }

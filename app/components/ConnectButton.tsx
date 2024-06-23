@@ -11,14 +11,14 @@ export default function ConnectButton() {
     const [loginState, setLoginState] = useAtom(isLogin);
     const [wallet, setWallet] = useAtom(address);
     useEffect(()=> {
-        if(walletInfo){
+        if(walletInfo && walletInfo.name){
             setLoginState(true);
             setWallet(walletInfo.name);
         }else{
             setLoginState(false);
             setWallet("");
         }
-    }, [setLoginState, setWallet, walletInfo]);
+    }, [setWallet]);
 
     if(loginState){
         return (

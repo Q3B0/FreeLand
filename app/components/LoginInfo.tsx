@@ -1,6 +1,6 @@
 import {Button, Link} from "@nextui-org/react";
 
-export default function LoginInfo({isLogin}){
+export default function LoginInfo(isLogin: boolean){
     if(isLogin){
         return (
             <p>0x00001</p>
